@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Growth-to-Give: the Giving Workbook. Redefining success by connecting your mission to your measurement.">
+<title>The Giving Workbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: a bound workbook. Ivory plate pages, engraved emblems, hairline gold rules; one reading column with a sticky stage ribbon. */
+:root{
+  --paper:#FAF8F3; --plate:#FFFFFF; --ink:#1D1B17; --ink-soft:#5E584E; --rule:#E4DCCB;
+  --gold:#A27A36; --gold-deep:#7E5C22; --gold-wash:rgba(162,122,54,.09); --field:#FFFFFF;
+  --display:"Cormorant Garamond","Cormorant",Garamond,"Times New Roman",serif;
+  --body:"Source Serif 4","Source Serif Pro",Georgia,"Times New Roman",serif;
+  --col:44rem;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#15130F; --plate:#1E1B15; --ink:#EDE7DA; --ink-soft:#A9A091; --rule:#3A342A;
+  --gold:#C9A25B; --gold-deep:#DDBB7A; --gold-wash:rgba(201,162,91,.10); --field:#1B1813; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#15130F; --plate:#1E1B15; --ink:#EDE7DA; --ink-soft:#A9A091; --rule:#3A342A;
+  --gold:#C9A25B; --gold-deep:#DDBB7A; --gold-wash:rgba(201,162,91,.10); --field:#1B1813; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65;padding-inline:20px;padding-block:0 4rem}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--gold-deep)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:var(--col);margin-inline:auto}
+.caps{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.24em;font-size:.82rem;color:var(--ink)}
+.rule-gold{display:block;width:2.5rem;height:1px;background:var(--gold);border:0}
+.soft{color:var(--ink-soft)}
+
+/* Cover */
+.cover{max-width:68rem;margin-inline:auto;display:grid;grid-template-columns:1fr minmax(0,1.05fr);gap:3rem;align-items:center;padding-block:3.5rem 3rem}
+.cover-text{display:flex;flex-direction:column;gap:1.4rem;min-width:0}
+.cover h1{font-size:clamp(2.6rem,5.4vw,4.1rem);letter-spacing:-.01em}
+.cover h1 em{font-style:italic;color:var(--gold-deep)}
+.cover .lede{font-size:1.15rem;color:var(--ink-soft);max-width:30rem}
+.plate{background:#FCFBF8;border:1px solid var(--rule);padding:clamp(.5rem,1.5vw,1rem);box-shadow:0 1px 0 var(--rule)}
+.plate img{display:block;width:100%;height:auto}
+.byline{font-size:.9rem;color:var(--ink-soft)}
+
+/* Ribbon nav */
+.ribbon{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-block:1px solid var(--rule);margin-inline:-20px;padding-inline:20px}
+.ribbon ol{list-style:none;margin:0 auto;padding:0;max-width:68rem;display:flex;gap:.25rem 1.6rem;overflow-x:auto;scrollbar-width:none}
+.ribbon ol::-webkit-scrollbar{display:none}
+.ribbon a{display:flex;align-items:center;gap:.5rem;padding:.75rem 0;text-decoration:none;color:var(--ink-soft);font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:.06em;white-space:nowrap}
+.ribbon a:hover{color:var(--ink)}
+.ribbon .dot{width:.55rem;height:.55rem;border-radius:50%;border:1px solid var(--gold);flex:none}
+.ribbon a.done .dot{background:var(--gold)}
+
+/* Example banner */
+.banner{max-width:var(--col);margin:2rem auto 0;border:1px solid var(--gold);background:var(--gold-wash);padding:1rem 1.25rem;display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;align-items:center;justify-content:space-between}
+.banner p{min-width:0;flex:1 1 18rem;font-size:.97rem}
+.btns{display:flex;flex-wrap:wrap;gap:.6rem}
+button{font:inherit;cursor:pointer}
+.btn{font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.05em;border:1px solid var(--gold);background:transparent;color:var(--ink);padding:.45rem 1.05rem}
+.btn:hover{background:var(--gold-wash)}
+.btn.solid{background:var(--gold);color:var(--paper);border-color:var(--gold)}
+.btn.solid:hover{background:var(--gold-deep);border-color:var(--gold-deep)}
+.btn.small{font-size:.9rem;padding:.3rem .8rem}
+
+/* Trinity */
+.trinity{padding-block:4rem 1rem;display:flex;flex-direction:column;gap:2rem}
+.trinity-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+.node{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.6rem}
+.emblem{width:7.5rem;height:7.5rem;border-radius:50%;border:1px solid var(--gold);background:#FCFBF8;padding:2px;flex:none}
+.emblem img{width:100%;height:100%;border-radius:50%;display:block}
+.node.later{opacity:.55}
+.node .caps{font-size:.9rem}
+.node p{font-size:.9rem;color:var(--ink-soft);line-height:1.45}
+.node .tag{font-family:var(--display);font-style:italic;font-size:1rem;color:var(--gold-deep)}
+
+.intro p{max-width:40rem}
+.quote{font-family:var(--display);font-style:italic;font-size:1.55rem;line-height:1.3;color:var(--ink);border-left:1px solid var(--gold);padding-left:1.25rem;max-width:38rem}
+
+/* Stages */
+.stage{padding-block:4.5rem 1rem;display:flex;flex-direction:column;gap:2rem;scroll-margin-top:3.5rem}
+.stage-head{display:flex;gap:1.25rem;align-items:flex-start}
+.stage-head .emblem{width:4.5rem;height:4.5rem}
+.stage-head > div{display:flex;flex-direction:column;gap:.45rem;min-width:0}
+.stage-head h2{font-size:clamp(2rem,4vw,2.6rem)}
+.stage-head .q{font-family:var(--display);font-style:italic;font-size:1.25rem;color:var(--ink-soft)}
+.sub{display:flex;flex-direction:column;gap:1.1rem}
+.sub h3{font-size:1.55rem}
+.sub > .soft{font-size:.98rem}
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field label,.field .lbl{font-size:.98rem;line-height:1.45}
+.field .hint{font-size:.86rem;color:var(--ink-soft)}
+textarea,input[type=text],input[type=number],select{font:inherit;font-size:.95rem;color:var(--ink);background:var(--field);border:1px solid var(--rule);border-bottom:1px solid var(--gold);padding:.25rem .5rem;width:100%;border-radius:0}
+textarea{resize:vertical;min-height:1.9rem;height:1.9rem;line-height:1.4;overflow:hidden}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-wash)}
+::placeholder{color:var(--ink-soft);opacity:.7;font-style:italic}
+
+.bridge{display:flex;align-items:center;gap:1rem;font-family:var(--display);font-style:italic;font-size:1.25rem;color:var(--gold-deep);text-align:center;padding-block:.5rem}
+.bridge::before,.bridge::after{content:"";flex:1;height:1px;background:var(--rule)}
+.bridge span{max-width:30rem}
+
+.leaves{border:1px solid var(--gold);padding:1.25rem 1.4rem;display:flex;flex-direction:column;gap:.75rem;background:var(--plate)}
+.leaves .caps{font-size:.76rem;color:var(--gold-deep)}
+
+.builder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.composed{font-family:var(--display);font-size:1.35rem;line-height:1.35;font-style:italic;color:var(--ink-soft)}
+.composed b{font-style:normal;font-weight:600;color:var(--ink)}
+
+.checks{display:flex;flex-direction:column;gap:.55rem}
+.check{display:flex;gap:.7rem;align-items:flex-start;font-size:.98rem;line-height:1.45}
+.check input{accent-color:var(--gold);width:1.05rem;height:1.05rem;margin-top:.2rem;flex:none}
+
+.snaps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.snap{border-top:1px solid var(--gold);padding-top:.8rem;display:flex;flex-direction:column;gap:.7rem;min-width:0}
+.snap .caps{font-size:.74rem}
+
+.examples{display:flex;flex-direction:column;gap:.4rem;font-size:.95rem}
+.examples li{color:var(--ink-soft)}
+.examples li i{color:var(--ink)}
+
+.tablewrap{overflow-x:auto;border-top:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.16em;font-size:.76rem;text-align:left;padding:.7rem .6rem;border-bottom:1px solid var(--rule);color:var(--ink-soft)}
+td{padding:.6rem;border-bottom:1px solid var(--rule);vertical-align:top}
+.ladder td:first-child{font-weight:600;white-space:nowrap}
+.offer td{padding:.4rem .3rem}
+.offer textarea{min-height:1.9rem;font-size:.92rem;padding:.25rem .45rem}
+.offer table{min-width:36rem}
+.x{border:0;background:transparent;color:var(--ink-soft);font-size:1.3rem;line-height:1;padding:.3rem .4rem}
+.x:hover{color:var(--gold-deep)}
+
+.units{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.6rem}
+.unit{border:1px solid var(--rule);padding:.7rem .85rem;background:var(--plate);display:flex;flex-direction:column;gap:.15rem;font-size:.9rem;line-height:1.4}
+.unit b{font-family:var(--display);font-size:1.15rem;font-weight:600}
+.unit span{color:var(--ink-soft)}
+.tests{counter-reset:t;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.6rem}
+.tests li{counter-increment:t;display:flex;gap:.8rem;font-size:.98rem}
+.tests li::before{content:counter(t);font-family:var(--display);font-weight:600;font-size:1.3rem;color:var(--gold);line-height:1.2;min-width:1rem}
+
+/* Levels */
+.levels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.level{background:var(--plate);padding:1rem;display:flex;flex-direction:column;gap:.45rem;font-size:.88rem;line-height:1.45;min-width:0}
+.level h4{margin:0;font-family:var(--display);font-size:1.25rem;font-weight:600}
+.level .no{color:var(--ink-soft);font-style:italic}
+.depth{display:inline-flex;gap:3px;align-items:center}
+.depth i{width:.45rem;height:.45rem;border-radius:50%;border:1px solid var(--gold)}
+.depth i.on{background:var(--gold)}
+.pill{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--display);font-weight:600;font-size:.85rem;letter-spacing:.06em;color:var(--ink-soft);white-space:nowrap}
+
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{border:1px solid var(--rule);background:var(--plate);color:var(--ink);padding:.4rem .9rem;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.03em}
+.chip:hover{border-color:var(--gold)}
+.chip[aria-pressed="true"]{border-color:var(--gold);background:var(--gold);color:var(--paper)}
+.note{font-size:.88rem;color:var(--gold-deep);font-style:italic;min-height:1.3em}
+
+.menu{display:flex;flex-direction:column;gap:1.5rem}
+.menu-theme{display:flex;flex-direction:column;gap:.2rem}
+.menu-theme h4{margin:0 0 .3rem;font-family:var(--display);font-size:1.35rem;font-weight:600}
+.menu-theme h4 span{font-style:italic;font-weight:500;color:var(--ink-soft);font-size:1.05rem}
+.mrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.3rem .9rem;align-items:start;padding:.7rem 0;border-top:1px solid var(--rule)}
+.mrow input{accent-color:var(--gold);width:1.1rem;height:1.1rem;margin-top:.3rem}
+.mrow .m{font-weight:600;font-size:.98rem;line-height:1.4}
+.mrow .meta{grid-column:2 / 4;font-size:.85rem;color:var(--ink-soft);line-height:1.4}
+.avail{font-size:.8rem;border:1px solid var(--rule);padding:.05rem .5rem;white-space:nowrap;color:var(--ink-soft)}
+.empty{font-style:italic;color:var(--ink-soft);font-size:.95rem;border:1px dashed var(--rule);padding:1rem}
+.own{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) auto;gap:.6rem;align-items:end}
+
+.cands{display:flex;flex-direction:column}
+.cand{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:.4rem 1.2rem;align-items:center;padding:.75rem 0;border-top:1px solid var(--rule)}
+.cand .m{font-weight:600;font-size:.98rem;line-height:1.4}
+.cand label{display:flex;gap:.4rem;align-items:center;font-size:.88rem;color:var(--ink-soft);white-space:nowrap}
+.cand input{accent-color:var(--gold)}
+.cand.primary{background:var(--gold-wash);margin-inline:-.75rem;padding-inline:.75rem}
+.card{border:1px solid var(--gold);background:var(--plate);padding:1.4rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.card .full{grid-column:1 / -1}
+.card h4{margin:0;font-family:var(--display);font-size:1.5rem;font-weight:600;line-height:1.2}
+.target{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap}
+.target input{font-family:var(--display);font-size:1.5rem;font-weight:600;width:6rem;padding:.05rem .4rem;font-variant-numeric:tabular-nums}
+
+/* Statement */
+.statement{background:var(--plate);border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:-8px;padding:clamp(1.5rem,5vw,3rem);display:flex;flex-direction:column;gap:1.5rem;align-items:stretch}
+.statement .top{display:flex;flex-direction:column;align-items:center;gap:.8rem;text-align:center}
+.statement .emblem{width:5.5rem;height:5.5rem}
+.statement h2{font-size:clamp(2rem,4.5vw,2.8rem)}
+.statement .mission{font-family:var(--display);font-style:italic;font-size:clamp(1.35rem,3vw,1.75rem);line-height:1.35;text-align:center;max-width:36rem;margin-inline:auto}
+.srows{display:grid;grid-template-columns:minmax(9rem,auto) minmax(0,1fr);border-top:1px solid var(--rule)}
+.srows dt,.srows dd{margin:0;padding:.7rem .4rem;border-bottom:1px solid var(--rule)}
+.srows dt{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:.76rem;color:var(--ink-soft);padding-top:.95rem}
+.srows dd{font-size:.98rem}
+.srows .big{font-family:var(--display);font-size:2rem;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+.missing{color:var(--ink-soft);font-style:italic}
+.copied{font-size:.9rem;color:var(--gold-deep);font-style:italic}
+
+.next{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
+.next .node{flex-direction:row;text-align:left;align-items:center;gap:1rem}
+.next .emblem{width:4rem;height:4rem}
+footer{padding-block:4rem 0;display:flex;flex-direction:column;gap:1.5rem;align-items:center;text-align:center}
+footer .quote{border:0;padding:0;text-align:center}
+.confirm{border:1px solid var(--gold);padding:.9rem 1.1rem;display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;background:var(--gold-wash)}
+
+@media (max-width:760px){
+  .cover{grid-template-columns:1fr;gap:2rem;padding-block:2.25rem 2rem}
+  .cover .plate{order:-1}
+  .builder,.snaps{grid-template-columns:1fr}
+  .levels{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .own{grid-template-columns:1fr 1fr}
+  .own .field:first-child{grid-column:1 / -1}
+  .card{grid-template-columns:1fr}
+  .next{grid-template-columns:1fr}
+  .emblem{width:5.5rem;height:5.5rem}
+  .stage-head .emblem{width:3.5rem;height:3.5rem}
+  .srows{grid-template-columns:1fr}
+  .srows dt{border-bottom:0;padding-bottom:0}
+  .cand{grid-template-columns:1fr auto auto}
+}
+@media (max-width:420px){.levels{grid-template-columns:1fr}.trinity-row{gap:.75rem}.node p{display:none}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+
+
+<header class="cover">
+  <div class="cover-text">
+    <p class="caps">Growth-to-Give &nbsp;·&nbsp; The Giving Workbook</p>
+    <h1>Redefining <em>Success</em></h1>
+    <p class="lede">This workbook helps you connect your mission to your measurement.</p>
+    <hr class="rule-gold">
+    <p class="byline">Facilitated by Maggie Cogan and Stephanie von Ohain<br>Proof of concept, October 2026</p>
+  </div>
+  <figure class="plate" style="margin:0">
+    <img src="images/holy-trinity.jpg" width="1312" height="1199" alt="The Holy Trinity of Business: the heart as WHY (soul, giving), the brain as WHAT (mind and ego, growth), and the nervous system as HOW (Holy Spirit, measurement and feedback), joined by a spiral.">
+  </figure>
+</header>
+
+<nav class="ribbon" aria-label="Workbook stages">
+  <ol>
+    <li><a href="#mission" data-stage="mission"><span class="dot"></span>1 · Mission</a></li>
+    <li><a href="#success" data-stage="success"><span class="dot"></span>2 · Success</a></li>
+    <li><a href="#outcomes" data-stage="outcomes"><span class="dot"></span>3 · Outcomes</a></li>
+    <li><a href="#metrics" data-stage="metrics"><span class="dot"></span>4 · Metrics</a></li>
+    <li><a href="#target" data-stage="target"><span class="dot"></span>5 · Target</a></li>
+    <li><a href="#statement" data-stage="statement"><span class="dot"></span>Giving Statement</a></li>
+  </ol>
+</nav>
+
+<div class="banner" id="banner">
+  <p id="bannerText"><b>You're reading the AAC worked example.</b> Every answer below is filled in for Ascension Analytics Consulting so you can see how the stages connect.</p>
+  <div class="btns" id="bannerBtns"><button class="btn solid small" id="startOwn">Start my own workbook</button>
+    <span class="btns" id="freshConfirm" hidden style="align-items:center"><span style="font-size:.95rem">This clears the example.</span><button class="btn solid small" id="yesFresh">Start fresh</button><button class="btn small" id="keepEx">Keep reading</button></span></div>
+</div>
+
+<main class="wrap">
+
+<section class="trinity" aria-labelledby="t-head">
+  <div class="intro" style="display:flex;flex-direction:column;gap:1rem">
+    <p class="caps" id="t-head">Where this workbook sits</p>
+    <p>Growth-to-Give is one living system seen three ways. The heart is your <b>WHY</b>, the brain is your <b>WHAT</b>, and the nervous system is your <b>HOW</b>. They are distinct, and they cannot be separated. This workbook begins at the heart.</p>
+  </div>
+  <div class="trinity-row">
+    <div class="node">
+      <div class="emblem"><img src="images/heart.png" alt="Engraved heart with a fern growing from it"></div>
+      <span class="caps">Why</span>
+      <p>Heart · Soul · Giving</p>
+      <span class="tag">You are here</span>
+    </div>
+    <div class="node later">
+      <div class="emblem"><img src="images/brain.png" alt="Engraved brain"></div>
+      <span class="caps">What</span>
+      <p>Brain · Mind / Ego · Growth</p>
+      <span class="tag">Next workbook</span>
+    </div>
+    <div class="node later">
+      <div class="emblem"><img src="images/nerve.png" alt="Engraved nervous system radiating from the spine"></div>
+      <span class="caps">How</span>
+      <p>Nervous System · Holy Spirit · Measurement &amp; Feedback</p>
+      <span class="tag">Woven through</span>
+    </div>
+  </div>
+  <p class="quote">Giving defines success. Growth funds success. Alignment guides success.</p>
+  <p class="soft" style="max-width:40rem">Five stages take you from why your work exists to one Giving metric and an annual target. Write freely; nothing here is a commitment until the last page. Your answers stay in this browser on this device.</p>
+</section>
+
+<!-- STAGE 1 -->
+<section class="stage" id="mission">
+  <div class="stage-head">
+    <div class="emblem"><img src="images/heart.png" alt=""></div>
+    <div>
+      <span class="caps">Stage 1 &nbsp;·&nbsp; Discover Mission</span>
+      <h2>Why does your work exist?</h2>
+      <p class="q">Most planning starts with how much you want to grow. We start with what you're growing for.</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>What moves you</h3>
+    <p class="soft">Giving: the purpose you carry into the world.</p>
+    <div class="field"><label for="r1_change">What change do you most want to create in the world, in your field, or for one person?</label><textarea id="r1_change" data-k="r1_change"></textarea></div>
+    <div class="field"><label for="r1_problem">What problem are you naturally drawn to solve, even when no one asks you to?</label><textarea id="r1_problem" data-k="r1_problem"></textarea></div>
+    <div class="field"><label for="r1_unpaid">What would you do even if you weren't paid? What work leaves you fulfilled rather than drained?</label><textarea id="r1_unpaid" data-k="r1_unpaid"></textarea></div>
+    <div class="field"><label for="r1_proud">What would make you proud of the business you built?</label><textarea id="r1_proud" data-k="r1_proud"></textarea></div>
+  </div>
+
+  <p class="bridge"><span>Purpose isn't only what you push out into the world. It also shows up in what comes back to you.</span></p>
+
+  <div class="sub">
+    <h3>What comes to you</h3>
+    <p class="soft">Receiving: the signals already flowing toward you.</p>
+    <div class="field"><label for="r2_come">What do people naturally come to you for, without you advertising it?</label><textarea id="r2_come" data-k="r2_come"></textarea></div>
+    <div class="field"><label for="r2_thanks">What have clients, customers or friends thanked you for? What words did they use?</label><textarea id="r2_thanks" data-k="r2_thanks"></textarea></div>
+    <div class="field"><label for="r2_moment">Think of a time someone's situation changed because of you. What changed for them?</label><textarea id="r2_moment" data-k="r2_moment"></textarea></div>
+    <div class="field"><label for="r2_return">What requests keep returning, even ones you haven't said yes to?</label><textarea id="r2_return" data-k="r2_return"></textarea></div>
+  </div>
+
+  <p class="bridge"><span>Now look at who appears in your answers.</span></p>
+
+  <div class="sub">
+    <h3>Who you serve</h3>
+    <div class="field"><label for="r3_who">Who do you most want to help? Describe them as specifically as you can.</label><textarea id="r3_who" data-k="r3_who"></textarea></div>
+    <div class="field"><label for="r3_best">Who are you best positioned to help, given your gifts and experience?</label><textarea id="r3_best" data-k="r3_best"></textarea></div>
+    <div class="field"><label for="r3_kind">Is your "who" a person, a business, a community, a place, or something else?</label><textarea id="r3_kind" data-k="r3_kind"></textarea></div>
+  </div>
+
+  <p class="bridge"><span>Last, look past this year.</span></p>
+
+  <div class="sub">
+    <h3>The difference you want to make</h3>
+    <div class="field"><label for="r4_beyond">If your business succeeded beyond your financial expectations, what would be different for others?</label><textarea id="r4_beyond" data-k="r4_beyond"></textarea></div>
+    <div class="field"><label for="r4_kind">What kind of impact do you want to have? Broad (reaching many) or deep (transforming a few)? Immediate or lasting? On individuals, organizations, communities or places?</label><textarea id="r4_kind" data-k="r4_kind"></textarea></div>
+    <div class="field"><label for="r4_five">What would the people you serve say about you in five years?</label><textarea id="r4_five" data-k="r4_five"></textarea></div>
+  </div>
+
+  <div class="sub">
+    <h3>Draft your mission</h3>
+    <p class="soft">Read back over your answers and notice the words that repeat. Use the sentence starter if it helps; it's a scaffold, not a rule.</p>
+    <div class="builder">
+      <div class="field"><label for="m_who">I exist to help…</label><input type="text" id="m_who" data-k="m_who" placeholder="who"></div>
+      <div class="field"><label for="m_change">achieve…</label><input type="text" id="m_change" data-k="m_change" placeholder="what change"></div>
+      <div class="field"><label for="m_contrib">through…</label><input type="text" id="m_contrib" data-k="m_contrib" placeholder="my contribution"></div>
+    </div>
+    <p class="composed" id="composed"></p>
+    <div class="field"><label for="mission"><b>My mission, in my own words</b></label><textarea id="mission" data-k="mission" placeholder="Write it however feels true. A draft is fine."></textarea>
+      <span class="hint">Other voices: "To give our neighbors a place and a reason to slow down and gather." (a bakery) · "To restore and protect the wild places our region depends on." (a land trust)</span></div>
+    <p class="lbl" style="font-size:.98rem">Before moving on, check your draft:</p>
+    <div class="checks">
+      <label class="check"><input type="checkbox" data-k="c1">It describes a change for someone other than me.</label>
+      <label class="check"><input type="checkbox" data-k="c2">I can picture one person or place experiencing it.</label>
+      <label class="check"><input type="checkbox" data-k="c3">I would be proud of it.</label>
+      <label class="check"><input type="checkbox" data-k="c4">It lets my paid work count, not only my free work.</label>
+    </div>
+  </div>
+  <div class="leaves"><span class="caps">You leave this stage with</span><p>Your mission, who you serve, the change you want to create, and the contribution through which it happens.</p></div>
+</section>
+
+<!-- STAGE 2 -->
+<section class="stage" id="success">
+  <div class="stage-head">
+    <div class="emblem"><img src="images/heart.png" alt=""></div>
+    <div>
+      <span class="caps">Stage 2 &nbsp;·&nbsp; Define Success</span>
+      <h2>If you were fulfilling your mission, what would actually be happening?</h2>
+    </div>
+  </div>
+  <p><b>What success means here.</b> Success is defined by the change in others and the ripple that change sends into the world, through families, teams, communities and the places they touch. It is never defined by revenue, followers or volume; those come back in Growth, where they belong.</p>
+
+  <div class="sub">
+    <h3>Three success snapshots</h3>
+    <p class="soft">Imagine it's one year from today. Describe three moments with someone, or something, you served.</p>
+    <div class="snaps">
+      <div class="snap"><span class="caps">Snapshot one</span>
+        <div class="field"><label for="s1b">Before: what was their situation?</label><textarea id="s1b" data-k="s1_before"></textarea></div>
+        <div class="field"><label for="s1a">After: what is different now?</label><textarea id="s1a" data-k="s1_after"></textarea></div>
+        <div class="field"><label for="s1s">Signal: how would you know?</label><textarea id="s1s" data-k="s1_signal"></textarea></div></div>
+      <div class="snap"><span class="caps">Snapshot two</span>
+        <div class="field"><label for="s2b">Before</label><textarea id="s2b" data-k="s2_before"></textarea></div>
+        <div class="field"><label for="s2a">After</label><textarea id="s2a" data-k="s2_after"></textarea></div>
+        <div class="field"><label for="s2s">Signal</label><textarea id="s2s" data-k="s2_signal"></textarea></div></div>
+      <div class="snap"><span class="caps">Snapshot three</span>
+        <div class="field"><label for="s3b">Before</label><textarea id="s3b" data-k="s3_before"></textarea></div>
+        <div class="field"><label for="s3a">After</label><textarea id="s3a" data-k="s3_after"></textarea></div>
+        <div class="field"><label for="s3s">Signal</label><textarea id="s3s" data-k="s3_signal"></textarea></div></div>
+    </div>
+    <p class="soft" style="font-size:.95rem">The signal is the nervous system at work: success is something you can sense, not only hope for.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Name the pattern</h3>
+    <div class="field"><label for="success_def">What do your "after" moments have in common? Complete the sentence: <i>Success means [who] are [what is different for them].</i></label><textarea id="success_def" data-k="success_def"></textarea></div>
+  </div>
+  <p class="bridge"><span>You've described success as it looks from the outside. Next, separate what you do from what actually changes.</span></p>
+</section>
+
+<!-- STAGE 3 -->
+<section class="stage" id="outcomes">
+  <div class="stage-head">
+    <div class="emblem"><img src="images/brain.png" alt=""></div>
+    <div>
+      <span class="caps">Stage 3 &nbsp;·&nbsp; Identify Outcomes</span>
+      <h2>What actually changes, and how do you count it?</h2>
+      <p class="q">What you do is not the same as what changes.</p>
+    </div>
+  </div>
+
+  <div class="tablewrap"><table class="ladder">
+    <thead><tr><th>Step</th><th>Meaning</th><th>Workshop example</th></tr></thead>
+    <tbody>
+      <tr><td>Activity</td><td>What we do</td><td>Host a workshop</td></tr>
+      <tr><td>Output</td><td>What we deliver</td><td>40 attendees</td></tr>
+      <tr><td>Outcome</td><td>What changes</td><td>People gain clarity and take action</td></tr>
+    </tbody></table></div>
+
+  <div class="sub">
+    <h3>Your offerings ladder</h3>
+    <p class="soft">List your main offerings, paid and unpaid. Paid work counts as Giving when it produces the change; what makes it count is the outcome, not whether money changed hands.</p>
+    <div class="tablewrap offer"><table>
+      <thead><tr><th>Activity</th><th>Output</th><th>Outcome</th><th><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Remove</span></th></tr></thead>
+      <tbody id="offerRows"></tbody></table></div>
+    <div><button class="btn small" id="addOffer">Add an offering</button></div>
+    <div class="field"><label for="desired_outcome"><b>Desired outcome.</b> Which outcome sits closest to your success definition?</label><textarea id="desired_outcome" data-k="desired_outcome"></textarea></div>
+  </div>
+
+  <div class="sub">
+    <h3>Choose your unit of success</h3>
+    <p class="soft">The unit is what you count when the outcome happens. It isn't always "people helped."</p>
+    <div class="units">
+      <div class="unit"><b>Businesses</b><span>Consultant: leadership acts on an evidence-based decision</span></div>
+      <div class="unit"><b>Learners</b><span>Educator: applies a new skill at work</span></div>
+      <div class="unit"><b>Households</b><span>Financial coach: adopts and uses a financial plan</span></div>
+      <div class="unit"><b>Guests</b><span>Hospitality: leaves feeling restored or welcomed</span></div>
+      <div class="unit"><b>Projects</b><span>Creative studio: a client's project is completed</span></div>
+      <div class="unit"><b>Acres</b><span>Environmental nonprofit: land restored to habitat</span></div>
+      <div class="unit"><b>Connections</b><span>Community group: members form lasting relationships</span></div>
+    </div>
+    <p class="lbl" style="font-size:.98rem">For abstract or experiential missions, three tests help:</p>
+    <ol class="tests">
+      <li><span><b>What changes?</b> Name the person, group, place or thing that is different afterward.</span></li>
+      <li><span><b>Would you recognize one?</b> If you can't tell when a single instance has happened, the unit is still too vague.</span></li>
+      <li><span><b>Can it be counted honestly?</b> Prefer a unit you can evidence over one that only sounds meaningful.</span></li>
+    </ol>
+    <div class="field"><label for="unit"><b>My unit of success</b></label><input type="text" id="unit" data-k="unit" placeholder="e.g. households, guests, acres"></div>
+  </div>
+</section>
+
+<!-- STAGE 4 -->
+<section class="stage" id="metrics">
+  <div class="stage-head">
+    <div class="emblem"><img src="images/nerve.png" alt=""></div>
+    <div>
+      <span class="caps">Stage 4 &nbsp;·&nbsp; Explore the Metric Menu</span>
+      <h2>How could you see that change?</h2>
+      <p class="q">A metric you can't sense is a metric you can't learn from.</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Four levels of evidence</h3>
+    <p class="soft">Every metric carries a level. The level tells you what the number can and cannot prove. Call a metric what it is: a book sale is reach, and attendance is engagement at most.</p>
+    <div class="levels">
+      <div class="level"><span class="depth"><i class="on"></i><i></i><i></i><i></i></span><h4>Reach</h4><p>Your contribution reached someone. <span class="soft">Sales, downloads, attendance.</span></p><p class="no">Doesn't prove anyone read, used or changed.</p></div>
+      <div class="level"><span class="depth"><i class="on"></i><i class="on"></i><i></i><i></i></span><h4>Engagement</h4><p>They actively took part. <span class="soft">Completions, questions, follow-up bookings.</span></p><p class="no">Doesn't prove anything changed.</p></div>
+      <div class="level"><span class="depth"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><h4>Behavior change</h4><p>They did something differently. <span class="soft">Follow-up check-ins, observed adoption.</span></p><p class="no">Doesn't prove it led to the result.</p></div>
+      <div class="level"><span class="depth"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><h4>Realized impact</h4><p>The change you exist for happened. <span class="soft">Milestones, decisions implemented, acres restored.</span></p><p class="no">Doesn't prove you were the only cause.</p></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Pick up to two themes</h3>
+    <p class="soft">Choose the themes closest to your mission. You'll see only their metrics.</p>
+    <div class="chips" id="themeChips" role="group" aria-label="Mission themes"></div>
+    <p class="note" id="themeNote" aria-live="polite"></p>
+  </div>
+
+  <div class="sub">
+    <h3>Choose 3 to 5 candidates</h3>
+    <div class="menu" id="menu"></div>
+    <div class="field"><span class="lbl"><b>Or write your own metric</b></span>
+      <div class="own">
+        <div class="field"><label for="own_m" class="hint">Metric</label><input type="text" id="own_m" placeholder="e.g. Families using their plan after 90 days"></div>
+        <div class="field"><label for="own_l" class="hint">Level</label><select id="own_l"><option value="reach">Reach</option><option value="engagement">Engagement</option><option value="behavior" selected>Behavior change</option><option value="impact">Realized impact</option></select></div>
+        <div class="field"><label for="own_u" class="hint">Unit</label><input type="text" id="own_u" placeholder="unit"></div>
+        <button class="btn small" id="addOwn">Add</button>
+      </div>
+    </div>
+    <p class="note" id="candCount" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- STAGE 5 -->
+<section class="stage" id="target">
+  <div class="stage-head">
+    <div class="emblem"><img src="images/nerve.png" alt=""></div>
+    <div>
+      <span class="caps">Stage 5 &nbsp;·&nbsp; Select and Target</span>
+      <h2>Which one matters most, and how much this year?</h2>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Choose your primary metric</h3>
+    <p class="soft">Pick one primary metric and up to two supporting ones. Supporting metrics usually pair one for scale (reach or engagement) with one for depth (behavior change or impact).</p>
+    <div class="cands" id="cands"></div>
+  </div>
+
+  <div class="sub" id="primaryBlock">
+    <h3>Your primary metric card</h3>
+    <div class="checks">
+      <span class="lbl" style="font-size:.98rem">Does it pass all four tests?</span>
+      <label class="check"><input type="checkbox" data-k="t1">It measures my desired outcome, in my unit.</label>
+      <label class="check"><input type="checkbox" data-k="t2">It sits as close to realized impact as I can honestly evidence.</label>
+      <label class="check"><input type="checkbox" data-k="t3">I can collect the data without a burden that stops it happening.</label>
+      <label class="check"><input type="checkbox" data-k="t4">A change in the number would change a decision I make.</label>
+    </div>
+    <div class="card">
+      <div class="full" style="display:flex;flex-direction:column;gap:.35rem"><span class="caps" style="font-size:.74rem;color:var(--gold-deep)">Primary Giving metric</span><h4 id="cardName">Choose a primary metric above</h4><span class="pill" id="cardLevel"></span></div>
+      <div class="field full"><label for="card_def">Definition: what counts, and what doesn't</label><textarea id="card_def" data-k="card_def"></textarea></div>
+      <div class="field"><label for="card_ev">Evidence: what proves an instance happened</label><textarea id="card_ev" data-k="card_ev"></textarea></div>
+      <div class="field"><label for="card_src">Source: where the data comes from</label><textarea id="card_src" data-k="card_src"></textarea></div>
+      <div class="field"><label for="card_freq">How often you'll check it</label><select id="card_freq" data-k="card_freq"><option value="">Choose…</option><option>After each engagement</option><option>Monthly</option><option>Quarterly</option><option>Twice a year</option><option>Annually</option></select></div>
+      <div class="field"><label for="card_unit">Unit</label><input type="text" id="card_unit" data-k="card_unit"></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Set your annual target</h3>
+    <p class="soft">Aspiration first. Growth will test what it takes, and Measurement &amp; Feedback will revisit it during the year.</p>
+    <div class="field"><label for="tp_proud">What number would make you proud at the end of the year?</label><textarea id="tp_proud" data-k="tp_proud"></textarea></div>
+    <div class="field"><label for="tp_serve">What number would feel meaningful to the people you serve?</label><textarea id="tp_serve" data-k="tp_serve"></textarea></div>
+    <div class="field"><label for="tp_last">If you know last year's number, where does this sit against it?</label><textarea id="tp_last" data-k="tp_last"></textarea></div>
+    <div class="field target"><label for="card_target"><b>My annual target</b></label><input type="number" min="0" id="card_target" data-k="card_target"><span class="soft" id="targetUnit"></span></div>
+    <div class="field"><label for="revise">One condition that would prompt me to revise it</label><textarea id="revise" data-k="revise"></textarea></div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="stage" id="statement" aria-labelledby="st-h">
+  <div class="statement">
+    <div class="top">
+      <div class="emblem"><img src="images/heart.png" alt=""></div>
+      <span class="caps" style="color:var(--gold-deep)">Growth-to-Give</span>
+      <h2 id="st-h">My Giving Statement</h2>
+      <hr class="rule-gold">
+    </div>
+    <p class="mission" id="stMission"></p>
+    <dl class="srows" id="stRows"></dl>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center">
+      <button class="btn solid" id="copyBtn">Copy my statement</button>
+      <span class="copied" id="copied" aria-live="polite"></span>
+    </div>
+    <textarea id="copyFallback" readonly hidden style="min-height:12rem"></textarea>
+  </div>
+
+  <div class="sub">
+    <h3>Where this goes next</h3>
+    <div class="next">
+      <div class="node later"><div class="emblem"><img src="images/brain.png" alt=""></div><div><span class="caps">Growth</span><p style="font-size:.95rem;color:var(--ink-soft)">What will it take? Compensation, operating needs and channel economics that fund this target.</p></div></div>
+      <div class="node later"><div class="emblem"><img src="images/nerve.png" alt=""></div><div><span class="caps">Measurement &amp; Feedback</span><p style="font-size:.95rem;color:var(--ink-soft)">Are we fulfilling our purpose? Signals that guide decisions through the year.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="quote">We don't grow so that one day we'll have enough to give. We give because that's our purpose, and we grow so that we can give more.</p>
+  <hr class="rule-gold">
+  <div class="btns" id="footBtns" style="justify-content:center">
+    <button class="btn small" id="loadExample">Show the AAC example</button>
+    <button class="btn small" id="clearAll">Clear my answers</button>
+  </div>
+  <div class="confirm" id="confirmBox" hidden>
+    <span id="confirmText"></span>
+    <button class="btn solid small" id="confirmYes">Yes</button>
+    <button class="btn small" id="confirmNo">Cancel</button>
+  </div>
+  <p class="byline">The framework stays consistent. The definition of success is personal.<br>© 2026 Ascension Analytics Consulting LLC · Clarity that propels you forward.</p>
+</footer>
+</main>
+
+<script>
+(function(){
+const KEY='g2g-giving-workbook-v1';
+const LEVELS={reach:{n:'Reach',d:1},engagement:{n:'Engagement',d:2},behavior:{n:'Behavior change',d:3},impact:{n:'Realized impact',d:4}};
+const THEMES=[
+ ['emp','Empowerment','Confidence and self-direction',[
+  ['reach','People reached by a resource or session','People','Sales, downloads or attendance','Have now'],
+  ['engagement','People completing a goal-setting exercise','People','Completed worksheets or session logs','Easy to collect'],
+  ['behavior','People taking a meaningful action toward a goal','People','Follow-up check-in','Easy to collect'],
+  ['impact','People reaching a milestone they set','Milestones','Confirmed at follow-up','Needs a new process']]],
+ ['edu','Education','Knowledge and skills',[
+  ['reach','Learners reached','Learners','Enrollment or attendance','Have now'],
+  ['engagement','Learners completing a course or module','Learners','Completion records','Have now'],
+  ['behavior','Learners demonstrating a skill gain','Learners','Assessment or demonstration','Easy to collect'],
+  ['impact','Learners applying the skill in work or life','Learners','Follow-up survey or observation','Needs a new process']]],
+ ['com','Community','Belonging and connection',[
+  ['reach','People attending community gatherings','Participants','Attendance','Have now'],
+  ['engagement','Participants returning for repeat gatherings','Participants','Attendance over time','Easy to collect'],
+  ['behavior','New connections made between members','Connections','Member check-in','Easy to collect'],
+  ['impact','Members reporting a stronger sense of belonging','Members','Short survey','Needs a new process']]],
+ ['bc','Business clarity','Informed decisions',[
+  ['reach','Leaders attending a session or using a resource','Leaders','Registration or sales','Have now'],
+  ['engagement','Leaders completing a review of their numbers','Leaders','Session completion log','Easy to collect'],
+  ['behavior','Leaders identifying a specific next step','Leaders or businesses','Written next step at session end','Easy to collect'],
+  ['impact','Evidence-based actions implemented','Actions or businesses','60-day follow-up confirmation','Needs a new process']]],
+ ['fin','Financial empowerment','Stability and opportunity',[
+  ['reach','Households reached with financial guidance','Households','Attendance or downloads','Have now'],
+  ['engagement','Households completing a financial review','Households','Completed review','Easy to collect'],
+  ['behavior','Financial plans adopted','Plans','Follow-up confirmation','Easy to collect'],
+  ['impact','Savings or debt goals reached','Goals','Confirmed at follow-up','Needs a new process']]],
+ ['well','Well-being','Improved quality of life',[
+  ['reach','People accessing a service','People','Booking or visit records','Have now'],
+  ['engagement','People completing a program','People','Completion records','Have now'],
+  ['behavior','People adopting a healthier behavior','People','Follow-up check-in','Easy to collect'],
+  ['impact','People reporting improved quality of life','People','Before-and-after self-report','Needs a new process']]],
+ ['cre','Creativity','Expression and inspiration',[
+  ['reach','People reached by creative work or classes','People','Attendance, views or sales','Have now'],
+  ['engagement','Creative projects started','Projects','Project log','Easy to collect'],
+  ['behavior','Creative skills applied in new work','People','Portfolio or showcase','Easy to collect'],
+  ['impact','Creative projects completed','Projects','Finished work shared','Easy to collect']]],
+ ['env','Environment','Restoration and conservation',[
+  ['reach','Volunteers or customers engaged in conservation','People','Sign-ups or sales','Have now'],
+  ['engagement','Restoration or clean-up events held','Events','Event log','Have now'],
+  ['behavior','Waste reduced or resources conserved','Pounds, gallons or kWh','Measured before and after','Needs a new process'],
+  ['impact','Acres restored to healthy habitat','Acres','Site survey','Needs a new process']]],
+ ['acc','Access','Reduced barriers',[
+  ['reach','People informed of an opportunity','People','Outreach records','Have now'],
+  ['engagement','People enrolling or applying','People','Applications','Have now'],
+  ['behavior','Barriers removed','Barriers','Documented change','Easy to collect'],
+  ['impact','People using an opportunity they couldn\'t before','People','Follow-up confirmation','Needs a new process']]],
+ ['hos','Hospitality and beauty','Meaningful experiences',[
+  ['reach','Guests served','Guests','Bookings or receipts','Have now'],
+  ['engagement','Guests returning','Guests','Repeat visits','Have now'],
+  ['behavior','Guests recommending the experience to others','Guests','Referrals or reviews','Easy to collect'],
+  ['impact','Guests reporting they left restored','Guests','Short guest card or survey','Needs a new process']]]
+];
+const BANK={};
+THEMES.forEach(([tid,tn,,rows])=>rows.forEach(([lv,m,u,ev,av])=>{BANK[tid+'-'+lv]={id:tid+'-'+lv,theme:tn,level:lv,metric:m,unit:u,evidence:ev,avail:av}}));
+
+const EXAMPLE={mode:'example',d:{
+ r1_change:'Help people see and live into their own potential, and help businesses decide from their numbers instead of guessing.',
+ r1_problem:'Capable people and business owners who feel stuck because they can\'t see clearly what\'s possible or what to do next.',
+ r1_unpaid:'Mentoring someone through a turning point. Sitting with an owner until their numbers make sense.',
+ r1_proud:'That people and businesses left clearer than they came, and acted on it.',
+ r2_come:'Making sense of data. Helping someone see strengths they\'ve overlooked.',
+ r2_thanks:'Clarity. "Now I know what to do next."',
+ r2_moment:'', r2_return:'',
+ r3_who:'Individuals at a turning point, and owners and leaders of businesses who want to understand their performance.',
+ r3_best:'People ready to take a next step, and businesses with data they aren\'t yet using.',
+ r3_kind:'Both people and businesses.',
+ r4_beyond:'More people living into their potential, and more businesses acting with confidence on evidence.',
+ r4_kind:'Deep first: lasting change for each person and business, rippling into their teams and families.',
+ r4_five:'',
+ m_who:'people and businesses', m_change:'clarity about their potential and their numbers', m_contrib:'mentoring, workshops and analytics',
+ mission:'To help people recognize and realize their own potential, and businesses to understand their numbers so they know what to do next.',
+ c1:true,c2:true,c3:true,c4:true,
+ s1_before:'A business owner with reports she never reads.', s1_after:'She can explain how the business is performing and has chosen a next step.', s1_signal:'She tells me what she\'s changing and why.',
+ s2_before:'A professional unsure of what she\'s good at.', s2_after:'She names her strengths and has a plan to use them.', s2_signal:'She takes the first step on that plan.',
+ s3_before:'', s3_after:'', s3_signal:'',
+ success_def:'Success means people and businesses are clear on where they stand and are acting on evidence-based next steps.',
+ desired_outcome:'A person or business takes a meaningful, evidence-based next step.',
+ unit:'People and businesses meaningfully helped',
+ t1:true,t2:true,t3:true,t4:true,
+ card_def:'Counts each person or business confirmed to have acted on a meaningful next step after working with AAC. Attendance alone does not count. (What "confirmed" means is still to be defined.)',
+ card_ev:'Follow-up confirmation from the person or business', card_src:'Follow-up check-ins after workshops, mentoring and consulting', card_freq:'Quarterly',
+ card_unit:'People and businesses', card_target:'50',
+ tp_proud:'50 people and businesses meaningfully helped.', tp_serve:'', tp_last:'This is the first year it is being measured.',
+ revise:'If the data reality check shows confirmations can\'t be collected reliably.'
+},
+ offers:[
+  {a:'Workshop',o:'About 40 attendees',c:'People gain clarity and take action'},
+  {a:'Mentoring',o:'3 mentoring relationships',c:'Mentees take meaningful action toward their potential'},
+  {a:'Consulting and analytics',o:'Analyses and recommendations',c:'Businesses act on evidence-based decisions'}],
+ themes:['bc','emp'],
+ custom:[
+  {id:'own-1',metric:'People and businesses confirmed to have taken a meaningful next step',level:'behavior',unit:'People and businesses',evidence:'Follow-up confirmation',avail:'Easy to collect'},
+  {id:'own-2',metric:'Workshop attendees',level:'engagement',unit:'Attendees',evidence:'Attendance records',avail:'Have now'},
+  {id:'own-3',metric:'Mentees reaching a verified meaningful outcome',level:'impact',unit:'Mentees',evidence:'To be defined',avail:'Needs a new process'}],
+ cands:['own-1','own-2','own-3','bc-impact'],
+ primary:'own-1', supporting:['own-2','own-3']
+};
+const BLANK=()=>({mode:'mine',d:{},offers:[{a:'',o:'',c:''},{a:'',o:'',c:''}],themes:[],custom:[],cands:[],primary:null,supporting:[]});
+
+let S;
+function load(){try{const r=localStorage.getItem(KEY);if(r){return JSON.parse(r)}}catch(e){}return JSON.parse(JSON.stringify(EXAMPLE))}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+S=load();
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const metricById=id=>BANK[id]||S.custom.find(c=>c.id===id);
+const depth=lv=>{const n=LEVELS[lv]?LEVELS[lv].d:0;return '<span class="depth" aria-hidden="true">'+[1,2,3,4].map(i=>'<i class="'+(i<=n?'on':'')+'"></i>').join('')+'</span>'};
+const pill=lv=>LEVELS[lv]?'<span class="pill">'+depth(lv)+LEVELS[lv].n+'</span>':'';
+
+function grow(t){t.style.height='auto';t.style.height=(t.scrollHeight+2)+'px'}
+
+function bindFields(){
+  $$('[data-k]').forEach(el=>{
+    const k=el.dataset.k, v=S.d[k];
+    if(el.type==='checkbox'){el.checked=!!v}else{el.value=v??''}
+    if(el.tagName==='TEXTAREA')grow(el);
+  });
+}
+document.addEventListener('input',e=>{
+  const el=e.target; if(!el.dataset||!el.dataset.k)return;
+  S.d[el.dataset.k]=el.type==='checkbox'?el.checked:el.value;
+  if(el.tagName==='TEXTAREA')grow(el);
+  touched(); refresh();
+});
+document.addEventListener('change',e=>{const el=e.target;if(el.dataset&&el.dataset.k&&(el.type==='checkbox'||el.tagName==='SELECT')){S.d[el.dataset.k]=el.type==='checkbox'?el.checked:el.value;touched();refresh()}});
+
+function touched(){save()}
+
+function composed(){
+  const w=S.d.m_who,c=S.d.m_change,p=S.d.m_contrib;
+  $('#composed').innerHTML='I exist to help <b>'+esc(w||'…')+'</b> achieve <b>'+esc(c||'…')+'</b> through <b>'+esc(p||'…')+'</b>.';
+}
+
+function renderOffers(){
+  const tb=$('#offerRows');
+  tb.innerHTML=S.offers.map((r,i)=>'<tr><td><textarea aria-label="Activity '+(i+1)+'" data-o="'+i+'" data-f="a" placeholder="What you do">'+esc(r.a)+'</textarea></td><td><textarea aria-label="Output '+(i+1)+'" data-o="'+i+'" data-f="o" placeholder="What you deliver">'+esc(r.o)+'</textarea></td><td><textarea aria-label="Outcome '+(i+1)+'" data-o="'+i+'" data-f="c" placeholder="What changes">'+esc(r.c)+'</textarea></td><td><button class="x" data-del="'+i+'" aria-label="Remove offering '+(i+1)+'">×</button></td></tr>').join('');
+  tb.querySelectorAll('textarea').forEach(grow);
+}
+$('#offerRows').addEventListener('input',e=>{const t=e.target;if(t.dataset.o==null)return;S.offers[+t.dataset.o][t.dataset.f]=t.value;grow(t);save()});
+$('#offerRows').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(!b)return;S.offers.splice(+b.dataset.del,1);if(!S.offers.length)S.offers.push({a:'',o:'',c:''});renderOffers();save()});
+$('#addOffer').addEventListener('click',()=>{S.offers.push({a:'',o:'',c:''});renderOffers();save();const last=$$('#offerRows textarea');last[last.length-3].focus()});
+
+function renderThemes(){
+  $('#themeChips').innerHTML=THEMES.map(([id,n])=>'<button class="chip" data-theme="'+id+'" aria-pressed="'+(S.themes.includes(id))+'">'+esc(n)+'</button>').join('');
+}
+$('#themeChips').addEventListener('click',e=>{
+  const b=e.target.closest('[data-theme]');if(!b)return;const id=b.dataset.theme;
+  if(S.themes.includes(id)){S.themes=S.themes.filter(t=>t!==id);$('#themeNote').textContent=''}
+  else if(S.themes.length>=2){$('#themeNote').textContent='Two themes is the limit. Remove one to choose another.';return}
+  else{S.themes.push(id);$('#themeNote').textContent=''}
+  renderThemes();renderMenu();save();
+});
+
+function renderMenu(){
+  const m=$('#menu');
+  let html='';
+  if(!S.themes.length)html='<p class="empty">Choose a theme above to see its metrics, or write your own below.</p>';
+  S.themes.forEach(tid=>{
+    const t=THEMES.find(x=>x[0]===tid);if(!t)return;
+    html+='<div class="menu-theme"><h4>'+esc(t[1])+' <span>· '+esc(t[2])+'</span></h4>'+
+      ['reach','engagement','behavior','impact'].map(lv=>{const x=BANK[tid+'-'+lv];return mrow(x)}).join('')+'</div>';
+  });
+  if(S.custom.length){html+='<div class="menu-theme"><h4>Your own metrics</h4>'+S.custom.map(mrow).join('')+'</div>'}
+  m.innerHTML=html;
+  const n=S.cands.length;
+  $('#candCount').textContent=n?(n+' candidate'+(n>1?'s':'')+' chosen'+(n<3?'. Aim for 3 to 5.':n>5?'. Consider narrowing to 5.':'.')):'';
+}
+function mrow(x){
+  const on=S.cands.includes(x.id);
+  return '<label class="mrow"><input type="checkbox" data-cand="'+x.id+'"'+(on?' checked':'')+'><span class="m">'+esc(x.metric)+'</span>'+pill(x.level)+'<span class="meta">Unit: '+esc(x.unit||'—')+' · Evidence: '+esc(x.evidence||'—')+' · <span class="avail">'+esc(x.avail||'To decide')+'</span></span></label>';
+}
+$('#menu').addEventListener('change',e=>{
+  const id=e.target.dataset.cand;if(!id)return;
+  if(e.target.checked){if(!S.cands.includes(id))S.cands.push(id)}
+  else{S.cands=S.cands.filter(c=>c!==id);if(S.primary===id)S.primary=null;S.supporting=S.supporting.filter(c=>c!==id)}
+  renderMenu();renderCands();refresh();save();
+});
+$('#addOwn').addEventListener('click',()=>{
+  const m=$('#own_m').value.trim();if(!m){$('#own_m').focus();return}
+  const id='own-'+Date.now().toString(36);
+  S.custom.push({id,metric:m,level:$('#own_l').value,unit:$('#own_u').value.trim(),evidence:'',avail:''});
+  S.cands.push(id);$('#own_m').value='';$('#own_u').value='';
+  renderMenu();renderCands();refresh();save();
+});
+
+function renderCands(){
+  const c=$('#cands');
+  if(!S.cands.length){c.innerHTML='<p class="empty">Your candidates from Stage 4 appear here.</p>';return}
+  c.innerHTML=S.cands.map(id=>{const x=metricById(id);if(!x)return'';const p=S.primary===id,s=S.supporting.includes(id);
+    return '<div class="cand'+(p?' primary':'')+'"><div style="display:flex;flex-direction:column;gap:.2rem;min-width:0"><span class="m">'+esc(x.metric)+'</span>'+pill(x.level)+'</div>'+
+    '<label><input type="radio" name="primary" data-primary="'+id+'"'+(p?' checked':'')+'> Primary</label>'+
+    '<label><input type="checkbox" data-support="'+id+'"'+(s?' checked':'')+(p?' disabled':'')+'> Supporting</label></div>'}).join('');
+}
+$('#cands').addEventListener('change',e=>{
+  const p=e.target.dataset.primary,s=e.target.dataset.support;
+  if(p){S.primary=p;S.supporting=S.supporting.filter(x=>x!==p);const x=metricById(p);
+    if(x){if(!S.d.card_ev)S.d.card_ev=x.evidence||'';if(!S.d.card_unit)S.d.card_unit=x.unit||''}bindFields()}
+  if(s){if(e.target.checked){if(S.supporting.length>=2){e.target.checked=false;return}S.supporting.push(s)}else S.supporting=S.supporting.filter(x=>x!==s)}
+  renderCands();refresh();save();
+});
+
+function stageDone(){
+  const d=S.d;
+  return {mission:!!(d.mission||'').trim(),success:!!(d.success_def||'').trim(),outcomes:!!((d.desired_outcome||'').trim()&&(d.unit||'').trim()),metrics:S.cands.length>0,target:!!(S.primary&&String(d.card_target||'').trim())};
+}
+
+function refresh(){
+  composed();
+  const d=S.d,pm=S.primary&&metricById(S.primary);
+  $('#cardName').textContent=pm?pm.metric:'Choose a primary metric above';
+  $('#cardLevel').innerHTML=pm?pill(pm.level).replace(/^<span class="pill">|<\/span>$/g,''):'';
+  $('#targetUnit').textContent=(d.card_unit||d.unit||'')+' this year';
+  // statement
+  const miss=t=>'<span class="missing">'+t+'</span>';
+  $('#stMission').innerHTML=(d.mission||'').trim()?esc(d.mission):miss('Your mission appears here once you write it in Stage 1.');
+  const sup=S.supporting.map(metricById).filter(Boolean);
+  const rows=[
+    ['Who I serve',d.m_who||d.r3_who],
+    ['The change I create',d.m_change||d.r1_change],
+    ['My contribution',d.m_contrib],
+    ['Success means',d.success_def],
+    ['Desired outcome',d.desired_outcome],
+    ['Unit of success',d.unit],
+    ['Primary metric',pm?esc(pm.metric)+'<br><span class="soft" style="font-size:.88rem">'+LEVELS[pm.level].n+(d.card_freq?' · checked '+esc(d.card_freq.toLowerCase()):'')+(d.card_ev?' · evidence: '+esc(d.card_ev):'')+'</span>':null,true],
+    ['Supporting',sup.length?sup.map(x=>esc(x.metric)+' <span class="soft" style="font-size:.88rem">('+LEVELS[x.level].n.toLowerCase()+')</span>').join('<br>'):null,true],
+    ['Annual target',String(d.card_target||'').trim()?'<span class="big">'+esc(d.card_target)+'</span> <span class="soft">'+esc(d.card_unit||d.unit||'')+'</span>':null,true]
+  ];
+  $('#stRows').innerHTML=rows.map(([k,v,raw])=>'<dt>'+k+'</dt><dd>'+(v&&String(v).trim()?(raw?v:esc(v)):miss('Not yet written'))+'</dd>').join('');
+  const done=stageDone();done.statement=Object.values(done).every(Boolean);
+  $$('.ribbon a').forEach(a=>a.classList.toggle('done',!!done[a.dataset.stage]));
+  // banner
+  $('#banner').hidden=S.mode!=='example';
+}
+
+function statementText(){
+  const d=S.d,pm=S.primary&&metricById(S.primary),sup=S.supporting.map(metricById).filter(Boolean);
+  const L=['MY GIVING STATEMENT','',
+   'Mission: '+(d.mission||''),'Who I serve: '+(d.m_who||d.r3_who||''),'The change I create: '+(d.m_change||d.r1_change||''),'My contribution: '+(d.m_contrib||''),
+   'Success means: '+(d.success_def||''),'Desired outcome: '+(d.desired_outcome||''),'Unit of success: '+(d.unit||''),
+   'Primary metric: '+(pm?pm.metric+' ('+LEVELS[pm.level].n+')':''),
+   '  Definition: '+(d.card_def||''),'  Evidence: '+(d.card_ev||''),'  Source: '+(d.card_src||''),'  Frequency: '+(d.card_freq||''),
+   'Supporting metrics: '+sup.map(x=>x.metric+' ('+LEVELS[x.level].n+')').join('; '),
+   'Annual target: '+(d.card_target||'')+' '+(d.card_unit||d.unit||''),
+   'Revisit if: '+(d.revise||''),'','Growth-to-Give · Ascension Analytics Consulting'];
+  return L.join('\n');
+}
+$('#copyBtn').addEventListener('click',()=>{
+  const t=statementText();
+  const fb=()=>{const ta=$('#copyFallback');ta.hidden=false;ta.value=t;grow(ta);ta.focus();ta.select();$('#copied').textContent='Select all and copy the text below.'};
+  try{navigator.clipboard.writeText(t).then(()=>{$('#copied').textContent='Copied.';$('#copyFallback').hidden=true},fb)}catch(e){fb()}
+});
+
+// confirm flows
+let pending=null;
+function ask(text,fn,where){pending=fn;$('#confirmText').textContent=text;$('#confirmBox').hidden=false;if(where)$('#confirmBox').scrollIntoView({block:'center'})}
+$('#confirmNo').addEventListener('click',()=>{pending=null;$('#confirmBox').hidden=true});
+$('#confirmYes').addEventListener('click',()=>{const f=pending;pending=null;$('#confirmBox').hidden=true;if(f)f()});
+function renderAll(){bindFields();renderOffers();renderThemes();renderMenu();renderCands();refresh()}
+function startFresh(){S=BLANK();save();renderAll();window.scrollTo({top:document.getElementById('mission').offsetTop-60})}
+$('#startOwn').addEventListener('click',()=>{$('#startOwn').hidden=true;$('#freshConfirm').hidden=false});
+$('#keepEx').addEventListener('click',()=>{$('#startOwn').hidden=false;$('#freshConfirm').hidden=true});
+$('#yesFresh').addEventListener('click',()=>{$('#startOwn').hidden=false;$('#freshConfirm').hidden=true;startFresh()});
+$('#loadExample').addEventListener('click',()=>{if(S.mode==='example'){window.scrollTo({top:0});return}ask('Replace your answers with the AAC example?',()=>{S=JSON.parse(JSON.stringify(EXAMPLE));save();renderAll();window.scrollTo({top:0})})});
+$('#clearAll').addEventListener('click',()=>ask('Clear every answer and start a blank workbook?',startFresh));
+
+renderAll();
+})();
+</script>
+
+</body>
+</html>
